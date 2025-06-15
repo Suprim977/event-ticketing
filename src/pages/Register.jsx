@@ -1,15 +1,24 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function Register() {
-  const navigate = useNavigate();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleRegister = (e) => {
+    e.preventDefault();
+    alert(`Registered: ${email}`);
+  };
 
   return (
-    <div style={{ textAlign: 'center', marginTop: '100px' }}>
-      <h2>Register Page</h2>
-      <button onClick={() => navigate('/')} style={{ marginTop: '20px' }}>
-        Back to Home
-      </button>
+    <div className="container">
+      <h2>Register</h2>
+      <form onSubmit={handleRegister}>
+        <input type="email" placeholder="Email" required value={email} onChange={(e) => setEmail(e.target.value)} />
+        <input type="password" placeholder="Password" required value={password} onChange={(e) => setPassword(e.target.value)} />
+        <button type="submit" className="btn">Register</button>
+      </form>
+      <p>Already have an account? <Link to="/login">Login here</Link></p>
     </div>
   );
 }
